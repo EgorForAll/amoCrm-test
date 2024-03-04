@@ -1,29 +1,24 @@
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import Row from "../row/row";
-import {useEffect, useState} from "react";
-import {SORT_TYPES, sortByName, sortByPrice} from "../../utils";
+import {nanoid} from "nanoid";
+import {SORT_TYPES, sortByName, sortByPrice} from "../../utils/utils";
+
 
 const Table = ({rows, sortType}) => {
-    const [sortedLeads, setSortedLeads] = useState(rows)
-    console.log(sortedLeads)
+    const [sortedRows, setSortedRows] = useState(rows)
 
     useEffect(() => {
-        let sorted;
         switch (sortType) {
-            case SORT_TYPES.NAME:
-                sorted = sortByName(rows)
-                break
             case SORT_TYPES.PRICE:
-                sorted = sortByPrice(rows)
+                setSortedRows([...sortByPrice(rows)])
                 break
-            case SORT_TYPES.DEFAULT:
-                sorted = rows
+            case SORT_TYPES.NAME:
+                setSortedRows([...sortByName(rows)])
                 break
             default:
-                sorted = rows
-                break
+                setSortedRows([...rows])
         }
-        setSortedLeads(sorted)
     }, [sortType])
 
     return (
@@ -39,7 +34,7 @@ const Table = ({rows, sortType}) => {
             </tr>
             </thead>
             <tbody>
-            {sortedLeads && sortedLeads.map((item, index) => <Row key={index} data={item} index={index}/>)}
+            {sortedRows.map((item, index) => <Row key={nanoid()} data={item} index={index}/>)}
             </tbody>
         </table>
     );
