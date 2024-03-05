@@ -1,4 +1,6 @@
 import moment from "moment";
+import throttledFetch from 'throttled-fetch';
+
 export const formatDate = (number) => moment(number).format('MMMM Do YYYY');
 
 export const SORT_TYPES = {
@@ -35,18 +37,5 @@ export const sortByName = (array) => array.sort((a, b) => {
     return 0
 })
 
-export const OPTIONS = [
-    {
-        label: 'По умолчанию',
-        value: SORT_TYPES.DEFAULT
-    },
-    {
-        label: 'По цене',
-        value: SORT_TYPES.PRICE
-    },
-    {
-        label: 'По названию',
-        value: SORT_TYPES.NAME
-    },
 
-]
+export const customFetch = throttledFetch(2, 2000)

@@ -7,7 +7,7 @@ import PaginationButton from "../pagination-button/pagination-button";
 
 const Table = ({rows, sortType, paginationType, setLeads}) => {
     const [rowsPaginated, setPaginatedRows] = useState([])
-    const [lastIndex, setLastIndex] = useState(10);
+    const [lastIndex, setLastIndex] = useState(1);
     const [sortedRows, setSortedRows] = useState(rows)
     const [error, setError] = useState('')
 
@@ -71,7 +71,7 @@ const Table = ({rows, sortType, paginationType, setLeads}) => {
                 <p className='text-danger'>{error}</p>
             </div>}
             <div className="row mt-3">
-                <PaginationButton paginationType={paginationType} lastIndex={lastIndex} hook={setLastIndex} setLeads={setLeads} length={rows.length} setError={setError}/>
+                <PaginationButton paginationType={paginationType} lastIndex={lastIndex} hook={setLastIndex} setLeads={setLeads} rows={rows} setError={setError}/>
             </div>
         </>
     );

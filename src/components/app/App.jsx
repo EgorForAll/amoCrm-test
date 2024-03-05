@@ -15,7 +15,7 @@ function App() {
 
     useEffect(() => {
         if (paginationType === PAGINATION_TYPE.DEFAULT) {
-            fetchFive().then((res) => res.json()).then((res) => setLeads(res._embedded.leads)).catch((e) => console.error(e))
+            fetchFive(1).then((res) => res.json()).then((res) => setLeads(res._embedded.leads)).catch((e) => console.error(e))
         } else {
             fetchAll().then((res) => setLeads(res._embedded.leads)).catch((e) => console.error(e))
         }
