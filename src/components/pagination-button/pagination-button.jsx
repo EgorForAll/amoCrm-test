@@ -1,13 +1,13 @@
 import * as React from 'react';
-import {PAGINATION_TYPE} from "../../utils/utils";
+import {PAGINATION_TYPE, debounce} from "../../utils/utils";
 import {fetchFive} from "../../api/fetch-five";
 import {useEffect, useState} from "react";
 
 const PaginationButton = ({paginationType, lastIndex, hook, setLeads, rows, setError}) => {
     const [disabled, setDisabled] = useState(false)
 
-    const loadNextLeads = () => {
-        fetchFive(lastIndex + 1).then((res) => {
+    const loadNextLeads = () =>
+        debounce(fetchFive(lastIndex + 1).then((res) => {
             if (res.status === 204) {
                 setDisabled(true)
                 setError('Сделки закончились')
@@ -18,8 +18,8 @@ const PaginationButton = ({paginationType, lastIndex, hook, setLeads, rows, setE
             if (res) {
                 setLeads(res._embedded.leads)
             }
-        }).catch((e) => console.error(e))
-    }
+        }).catch((e) => console.error(e)))
+
 
     useEffect(() => {
         if (paginationType !== PAGINATION_TYPE.DEFAULT) {

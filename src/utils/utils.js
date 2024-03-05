@@ -1,5 +1,4 @@
 import moment from "moment";
-import throttledFetch from 'throttled-fetch';
 
 export const formatDate = (number) => moment(number).format('MMMM Do YYYY');
 
@@ -38,4 +37,13 @@ export const sortByName = (array) => array.sort((a, b) => {
 })
 
 
-export const customFetch = throttledFetch(2, 2000)
+export const debounce = (cb, delay = 2000) => {
+    let timeout
+
+    return (...args) => {
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
+            cb(...args)
+        }, delay)
+    }
+}
