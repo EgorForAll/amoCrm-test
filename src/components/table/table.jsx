@@ -5,10 +5,11 @@ import {nanoid} from "nanoid";
 import {PAGINATION_TYPE, SORT_TYPES, sortByName, sortByPrice} from "../../utils/utils";
 import PaginationButton from "../pagination-button/pagination-button";
 
-const Table = ({rows, sortType, paginationType}) => {
+const Table = ({rows, sortType, paginationType, setLeads}) => {
     const [rowsPaginated, setPaginatedRows] = useState([])
     const [lastIndex, setLastIndex] = useState(10);
     const [sortedRows, setSortedRows] = useState(rows)
+    const [error, setError] = useState('')
 
     useEffect(() => {
         switch (paginationType) {
@@ -22,13 +23,17 @@ const Table = ({rows, sortType, paginationType}) => {
                 setLastIndex(10)
                 break
             default:
-                setLastIndex(-1)
+                setLastIndex(1)
         }
     }, [paginationType])
 
     useEffect(() => {
+        if (paginationType === PAGINATION_TYPE.DEFAULT) {
+            setPaginatedRows([...rows.slice()])
+            return
+        }
         setPaginatedRows([...rows.slice(0, lastIndex)])
-    }, [lastIndex])
+    }, [lastIndex, rows])
 
     useEffect(() => {
         switch (sortType) {
@@ -62,8 +67,11 @@ const Table = ({rows, sortType, paginationType}) => {
                     </tbody>
                 </table>
             </div>
+            {error && <div className='row'>
+                <p className='text-danger'>{error}</p>
+            </div>}
             <div className="row mt-3">
-                <PaginationButton paginationType={paginationType} lastIndex={lastIndex} hook={setLastIndex}/>
+                <PaginationButton paginationType={paginationType} lastIndex={lastIndex} hook={setLastIndex} setLeads={setLeads} length={rows.length} setError={setError}/>
             </div>
         </>
     );

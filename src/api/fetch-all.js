@@ -7,5 +7,5 @@ export const fetchAll = async (hook) =>
             "Authorization": `Bearer ${ACCESS_TOKEN}`,
             "Access-Control-Allow-Headers": '*'
         }
-    }).then((res) => res.json()).then((res) => hook(res._embedded.leads)).catch((e) => console.error(e))
+    }).then((res) => res.json())
 
