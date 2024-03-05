@@ -1,0 +1,10 @@
+.pagination {
+    display: flex;
+    align-items: center;
+    width: max-content;
+}
+
+.pagination-input {
+    margin-left: 10px;
+    max-width: 300px;
+}

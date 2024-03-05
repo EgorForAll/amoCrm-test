@@ -1,0 +1,10 @@
+.sorting {
+    display: flex;
+    align-items: center;
+    width: max-content;
+}
+
+.sorting-input {
+    max-width: 300px;
+    margin-left: 30px;
+}

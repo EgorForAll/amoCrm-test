@@ -1,4 +1,5 @@
 import * as React from 'react';
+import "./sorting.css";
 import {SORT_TYPES} from "../../utils/utils";
 
 const Sorting = ({hook, sortType}) => {

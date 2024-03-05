@@ -7,6 +7,13 @@ export const SORT_TYPES = {
     DEFAULT: 'default'
 }
 
+export const PAGINATION_TYPE = {
+    DEFAULT: 'default',
+    TWO: 'two',
+    FIVE: 'five',
+    TEN: 'ten'
+
+}
 
 export const sortByPrice = (array) => array.sort((a, b) => {
     if (a.price < b.price) {
